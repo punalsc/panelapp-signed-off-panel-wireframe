@@ -1,0 +1,54 @@
+h6 {
+  font-size: 2rem;
+}
+
+.genes {
+  background-color: #f8f8f8;
+  border: 1px solid gainsboro;
+  border-radius: 7px;
+}
+
+.gene-data {
+  margin: 0.5em 0;
+  padding: 1em;
+  border-bottom: 1px solid gainsboro;
+
+  &:last-of-type {
+    border: none;
+  }
+
+  .tag {
+    display: inline-block;
+    background-color: #e8e8e8;
+    border: 1px solid gainsboro;
+    padding: 0.4em;
+    margin: 0 0 0.2em;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+
+  .confidence-level-badge {
+    text-align: center;
+    padding: 0.2em;
+    display: block;
+    background-color: #e8e8e8;
+    border: 1px solid gainsboro;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  .confidence-level-badge-green {
+    background-color: #3fad46;
+    border: 1px solid #318536;
+    color: white;
+  }
+  .confidence-level-badge-amber {
+    background-color: #f0ad4e;
+    border: 1px solid #d39945;
+    color: white;
+  }
+  .confidence-level-badge-red {
+    background-color: #d9534f;
+    border: 1px solid #ac413e;
+    color: white;
+  }
+}
