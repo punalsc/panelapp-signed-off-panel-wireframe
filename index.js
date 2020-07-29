@@ -22,7 +22,7 @@ const confidenceLevel = (el) => {
 };
 
 fetch(
-  "https://panelapp.genomicsengland.co.uk/api/v1/panels/signedoff/79/?format=json"
+  "https://panelapp.genomicsengland.co.uk/api/v1/panels/signedoff/842/?format=json"
 )
   .then((response) => response.json())
   .then((data) => {
@@ -34,6 +34,8 @@ fetch(
       types,
       genes,
     } = data;
+
+    const columns = [""];
     let result = "";
 
     if (name) {
@@ -60,9 +62,9 @@ fetch(
                 <div class='genes'>
                         <div class='row gene-data'>
                                 <div class='one columns'><b>Level</b></div>
-                                <div class='one columns'><b>Entity</b></div>
+                                <div class='two columns'><b>Entity</b></div>
                                 <div class='three columns'><b>Mode of inheritance</b></div>
-                                <div class='three columns'><b>Mode of pathogenicity</b></div>
+                                <div class='two columns'><b>Mode of pathogenicity</b></div>
                                 <div class='three columns'><b>Tags</b></div>
                         </div>
                         ${genes
@@ -75,7 +77,7 @@ fetch(
                                 ).toLowerCase()}'>${confidenceLevel(
                                 gene.confidence_level
                               )}</span></div>
-                                <div class='one columns'><b>${
+                                <div class='two columns'><b>${
                                   gene.entity_name
                                 }</b></div>
                                 <div class='three columns'>${
@@ -83,8 +85,9 @@ fetch(
                                     ? "N/A"
                                     : gene.mode_of_inheritance
                                 }</div>
-                                <div class='three columns'>${
-                                  gene.mode_of_pathogenicity === ""
+                                <div class='two columns'>${
+                                  gene.mode_of_pathogenicity === "" ||
+                                  gene.mode_of_pathogenicity === null
                                     ? "N/A"
                                     : gene.mode_of_pathogenicity
                                 }</div>
@@ -100,8 +103,7 @@ fetch(
                               </div>
                               `
                           )
-                          .join("")}
-                        
+                          .join("")}        
                 </div>
                 `;
       console.log(data);
