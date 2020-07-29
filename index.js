@@ -1,3 +1,5 @@
+import moment from "moment";
+
 document.getElementById("items").innerHTML = `<p>Loading...</p>`;
 
 const confidenceLevel = (el) => {
@@ -24,18 +26,32 @@ fetch(
 )
   .then((response) => response.json())
   .then((data) => {
+    const {
+      name,
+      version,
+      relevant_disorders,
+      signed_off,
+      types,
+      genes,
+    } = data;
     let result = "";
 
-    if (data.name) {
+    if (name) {
       result = `    
                 <div class='titles'>
                     <div class='row'>
                         <div class='twelve columns'>
-                            <h4><b>${data.name} (Version: ${
-        data.version
-      })</b></h4>
-                            <h6><b>Signed off date:</b> ${data.signed_off}</h6>
-                            <h6><b>Panel types:</b> ${data.types
+                            <h4><b>${name} (Version: ${version})</b></h4>
+                            
+                            <h6><b>Relevant disorders:</b> ${
+                              relevant_disorders.length === 0
+                                ? "N/A"
+                                : relevant_disorders.map((rd) => rd).join(", ")
+                            }</h6>                      
+                            <h6><b>Signed off date:</b> ${moment(
+                              signed_off
+                            ).format("D MMM YYYY")}</h6>
+                            <h6><b>Panel types:</b> ${types
                               .map((item) => item.name)
                               .join(", ")}</h6>   
                         </div>
@@ -49,7 +65,7 @@ fetch(
                                 <div class='three columns'><b>Mode of pathogenicity</b></div>
                                 <div class='three columns'><b>Tags</b></div>
                         </div>
-                        ${data.genes
+                        ${genes
                           .map(
                             (gene) =>
                               `
