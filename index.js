@@ -58,9 +58,9 @@ fetch(
                                 ).toLowerCase()}'>${confidenceLevel(
                                 gene.confidence_level
                               )}</span></div>
-                                <div class='two columns'>${
+                                <div class='two columns'><b>${
                                   gene.entity_name
-                                }</div>
+                                }</b></div>
                                 <div class='three columns'>${
                                   gene.mode_of_inheritance === ""
                                     ? "N/A"
