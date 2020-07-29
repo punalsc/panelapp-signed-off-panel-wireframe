@@ -3,6 +3,13 @@ body {
     Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
+.container {
+  max-width: 70%;
+}
+
+h5 {
+  margin-bottom: 0.5rem;
+}
 h6 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
@@ -30,7 +37,6 @@ h6 {
     padding: 0.4em;
     margin: 0 0 0.2em;
     border-radius: 4px;
-    font-weight: bold;
   }
 
   .confidence-level-badge {
