@@ -33,9 +33,10 @@ fetch(
                         <div class='twelve columns'>
                             <h6><b>Name:</b> ${data.name}</h6>
                             <h6><b>Version:</b> ${data.version}</h6>
+                            <h6><b>Signed off date:</b> ${data.signed_off}</h6>
                             <h6><b>Panel types:</b> ${data.types
                               .map((item) => item.name)
-                              .join(", ")}</h6>
+                              .join(", ")}</h6>   
                         </div>
                     </div>
                 </div>
@@ -61,14 +62,24 @@ fetch(
                                   gene.entity_name
                                 }</div>
                                 <div class='three columns'>${
-                                  gene.mode_of_inheritance
+                                  gene.mode_of_inheritance === ""
+                                    ? "N/A"
+                                    : gene.mode_of_inheritance
                                 }</div>
                                 <div class='two columns'>${
-                                  gene.mode_of_pathogenicity
+                                  gene.mode_of_pathogenicity === ""
+                                    ? "N/A"
+                                    : gene.mode_of_pathogenicity
                                 }</div>
-                            <div class='two columns'>${gene.tags
-                              .map((tag) => `<span class='tag'>${tag}</span>`)
-                              .join(" ")}</div>
+                            <div class='two columns'>${
+                              gene.tags.length === 0
+                                ? "N/A"
+                                : gene.tags
+                                    .map(
+                                      (tag) => `<span class='tag'>${tag}</span>`
+                                    )
+                                    .join(" ")
+                            }</div>
                               </div>
                               `
                           )
