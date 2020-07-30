@@ -34,13 +34,14 @@ fetch(
       types,
       genes,
       strs,
+      regions,
     } = data;
 
-    const arrItems = [...genes, ...strs];
+    const arrItems = [...genes, ...strs, ...regions];
 
     const sortedItems = arrItems.sort((a, b) =>
-      a.entity_name !== b.entity_name
-        ? a.entity_name < b.entity_name
+      a.confidence_level !== b.confidence_level
+        ? a.confidence_level > b.confidence_level
           ? -1
           : 1
         : 0
@@ -99,6 +100,11 @@ fetch(
                                     return `<span class="tag--small">${tag}</span>`;
                                   }
                                 })}
+                                ${
+                                  gene.entity_type === "region"
+                                    ? `<span class="tag--small">${gene.entity_type}</span>`
+                                    : ""
+                                }
                               </div>
                               </div>
                                 <div class='${three} columns'>${
