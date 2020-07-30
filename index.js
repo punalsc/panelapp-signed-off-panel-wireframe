@@ -108,7 +108,8 @@ fetch(
                               }</div>
                                 <div class='${two} columns'>${
                                 gene.mode_of_pathogenicity === "" ||
-                                gene.mode_of_pathogenicity === null
+                                gene.mode_of_pathogenicity === null ||
+                                gene.mode_of_pathogenicity === undefined
                                   ? "N/A"
                                   : gene.mode_of_pathogenicity
                               }</div>
