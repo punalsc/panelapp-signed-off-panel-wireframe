@@ -75,7 +75,7 @@ fetch(
                 </div>
                 <div class='genes'>
                         <div class='row gene-data'>
-                                <div class='${two} columns'><b>Level</b></div>
+                                <div class='${two} columns'><b>Entity rating</b></div>
                                 <div class='${two} columns'><b>Entity</b></div>
                                 <div class='${three} columns'><b>Mode of inheritance</b></div>
                                 <div class='${two} columns'><b>Mode of pathogenicity</b></div>
