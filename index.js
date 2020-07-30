@@ -5,7 +5,7 @@ document.getElementById("items").innerHTML = `<p>Loading...</p>`;
 const confidenceLevel = (el) => {
   switch (el) {
     case "0":
-      return "Gray";
+      return "No list";
       break;
     case "1":
       return "Red";
@@ -22,7 +22,7 @@ const confidenceLevel = (el) => {
 };
 
 fetch(
-  "https://panelapp.genomicsengland.co.uk/api/v1/panels/signedoff/842/?format=json"
+  "https://panelapp.genomicsengland.co.uk/api/v1/panels/signedoff/477/?format=json"
 )
   .then((response) => response.json())
   .then((data) => {
@@ -33,12 +33,21 @@ fetch(
       signed_off,
       types,
       genes,
+      strs,
     } = data;
 
-    const columnsOrder = ["one", "two", "three"];
-    const columnOne = columnsOrder[0];
-    const columnTwo = columnsOrder[1];
-    const columnThree = columnsOrder[2];
+    const arrItems = [...genes, ...strs];
+
+    const sortedItems = arrItems.sort((a, b) =>
+      a.entity_name !== b.entity_name
+        ? a.entity_name < b.entity_name
+          ? -1
+          : 1
+        : 0
+    );
+
+    const columnsOrder = ["two", "three"];
+    const [two, three] = columnsOrder;
 
     let result = "";
 
@@ -65,37 +74,45 @@ fetch(
                 </div>
                 <div class='genes'>
                         <div class='row gene-data'>
-                                <div class='${columnOne} columns'><b>Level</b></div>
-                                <div class='${columnTwo} columns'><b>Entity</b></div>
-                                <div class='${columnThree} columns'><b>Mode of inheritance</b></div>
-                                <div class='${columnTwo} columns'><b>Mode of pathogenicity</b></div>
-                                <div class='${columnThree} columns'><b>Tags</b></div>
+                                <div class='${two} columns'><b>Level</b></div>
+                                <div class='${two} columns'><b>Entity</b></div>
+                                <div class='${three} columns'><b>Mode of inheritance</b></div>
+                                <div class='${two} columns'><b>Mode of pathogenicity</b></div>
+                                <div class='${three} columns'><b>Tags</b></div>
                         </div>
-                        ${genes
+                        ${sortedItems
                           .map(
                             (gene) =>
                               `
                               <div class='row gene-data'>
-                                <div class='${columnOne} columns'><span class='confidence-level-badge confidence-level-badge-${confidenceLevel(
+                                <div class='${two} columns'><span class='confidence-level-badge confidence-level-badge-${confidenceLevel(
                                 gene.confidence_level
                               ).toLowerCase()}'>${confidenceLevel(
                                 gene.confidence_level
                               )}</span></div>
-                                <div class='${columnTwo} columns'><b>${
+                                <div class='${two} columns'><b>${
                                 gene.entity_name
-                              }</b></div>
-                                <div class='${columnThree} columns'>${
+                              }</b>
+                              <div>
+                                ${gene.tags.map((tag) => {
+                                  if (tag === "STR") {
+                                    return `<span class="tag--small">${tag}</span>`;
+                                  }
+                                })}
+                              </div>
+                              </div>
+                                <div class='${three} columns'>${
                                 gene.mode_of_inheritance === ""
                                   ? "N/A"
                                   : gene.mode_of_inheritance
                               }</div>
-                                <div class='${columnTwo} columns'>${
+                                <div class='${two} columns'>${
                                 gene.mode_of_pathogenicity === "" ||
                                 gene.mode_of_pathogenicity === null
                                   ? "N/A"
                                   : gene.mode_of_pathogenicity
                               }</div>
-                            <div class='${columnThree} columns'>${
+                            <div class='${three} columns'>${
                                 gene.tags.length === 0
                                   ? "N/A"
                                   : gene.tags

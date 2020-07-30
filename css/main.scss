@@ -37,6 +37,11 @@ h6 {
     padding: 0.4em;
     margin: 0 0 0.2em;
     border-radius: 4px;
+
+    &--small {
+      @extend .tag;
+      font-size: 0.75em;
+    }
   }
 
   .confidence-level-badge {
@@ -48,20 +53,24 @@ h6 {
     border-radius: 4px;
     font-weight: bold;
     font-size: 0.85em;
-  }
-  .confidence-level-badge-green {
-    background-color: #3fad46;
-    border: 1px solid #318536;
-    color: white;
-  }
-  .confidence-level-badge-amber {
-    background-color: #f0ad4e;
-    border: 1px solid #d39945;
-    color: white;
-  }
-  .confidence-level-badge-red {
-    background-color: #d9534f;
-    border: 1px solid #ac413e;
-    color: white;
+
+    &-green {
+      @extend .confidence-level-badge;
+      background-color: #3fad46;
+      border: 1px solid #318536;
+      color: white;
+    }
+    &-amber {
+      @extend .confidence-level-badge;
+      background-color: #f0ad4e;
+      border: 1px solid #d39945;
+      color: white;
+    }
+    &-red {
+      @extend .confidence-level-badge;
+      background-color: #d9534f;
+      border: 1px solid #ac413e;
+      color: white;
+    }
   }
 }
