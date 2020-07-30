@@ -98,7 +98,7 @@ fetch(
                               
                                 ${
                                   gene.panel
-                                    ? `<div class='panel-name'>${gene.panel.name} (Version: ${gene.panel.version})</div>`
+                                    ? `<div class='panel-name'>${gene.panel.name}</div><div>Version: ${gene.panel.version}</div>`
                                     : ""
                                 }
 
