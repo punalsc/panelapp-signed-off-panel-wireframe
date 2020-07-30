@@ -22,7 +22,7 @@ const confidenceLevel = (el) => {
 };
 
 fetch(
-  "https://panelapp.genomicsengland.co.uk/api/v1/panels/signedoff/477/?format=json"
+  "https://panelapp.genomicsengland.co.uk/api/v1/panels/signedoff/285/?format=json"
 )
   .then((response) => response.json())
   .then((data) => {
@@ -91,18 +91,29 @@ fetch(
                               ).toLowerCase()}'>${confidenceLevel(
                                 gene.confidence_level
                               )}</span></div>
-                                <div class='${two} columns'><b>${
+                                <div class='${two} columns'><div><b>${
                                 gene.entity_name
-                              }</b>
+                              }</b></div>
                               <div>
-                                ${gene.tags.map((tag) => {
-                                  if (tag === "STR") {
-                                    return `<span class="tag--small">${tag}</span>`;
-                                  }
-                                })}
+                              
+                                ${
+                                  gene.panel
+                                    ? `<div class='panel-name'>${gene.panel.name}</div>`
+                                    : ""
+                                }
+
+                                ${gene.tags
+                                  .map((tag) => {
+                                    if (tag === "STR") {
+                                      return `<span class="tag--small">${tag}</span>`;
+                                    } else {
+                                      return "";
+                                    }
+                                  })
+                                  .join("")}
                                 ${
                                   gene.entity_type === "region"
-                                    ? `<span class="tag--small">${gene.entity_type}</span>`
+                                    ? `<div class='verbose-name'>${gene.verbose_name}</div><span class="tag--small">${gene.entity_type}</span>`
                                     : ""
                                 }
                               </div>
